@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="common.js"></script>
+</head>
+<body onload="callService('/products/all',handleAllProductsData)">
+SHOPPING CART
+<br/>
+
+	<div id="orderSection">
+		<table id="products_table" border="1">
+			<tr>
+				<td>Product Name</td>
+				<td>Description</td>
+				<td>Price</td>
+				<td>Quantity</td>
+			</tr>
+		</table>
+		<input type="button" value="Checkout" onClick="cartCheckout()">
+	</div>	
+
+	<div id="billDetails" style="display: none;">
+	
+		<br/>Bill Details
+		<table id="bill_table" border="1">
+			<tr>
+				<td>Product Name</td>
+				<td>Quantity</td>
+				<td>Tax + Cost Price</td>
+				<td>Total</td>
+			</tr>
+		</table>
+		
+		<br/>
+		<div>Number of Items: <span id="numberOfItems"></span></div> 
+		<div>Tax: <span id="totalTax"></span></div> 
+		<div>Total Amount: <span id="totalBill"></span></div><br/>
+		
+		<input type="button" value="Refresh" onClick="refresh()">
+		
+	</div>
+
+</body>
+</html>

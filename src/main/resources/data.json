@@ -1,0 +1,25 @@
+{
+	"allProducts" : [
+	  {
+			"id": "1",
+			"name": "product A",
+			"description": "product A description",
+			"price": "100",
+			"tax": 10
+		},
+		{
+			"id": "2",
+			"name": "product B",
+			"description": "product B description",
+			"price": "100",
+			"tax": 20
+		},
+		{
+			"id": "3",
+			"name": "product C",
+			"description": "product C description",
+			"price": "100",
+			"tax": 0
+		}
+	]
+}
