@@ -1,0 +1,15 @@
+{
+	"productCategories" : [
+	  	{
+			"type": "A",
+			"tax" : 10
+		},
+		{
+			"type": "B",
+			"tax" : 20
+		},{
+			"type": "C",
+			"tax" : 0
+		}
+	]
+}

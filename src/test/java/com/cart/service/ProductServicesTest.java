@@ -75,7 +75,7 @@ public class ProductServicesTest {
 	}
 	
 	@Test
-	public void testGetBillDetailsExceptionScenario() {
+	public void testGetBillDetailsExceptionScenarioInvalidProductIdOrProductCategory() {
 		testSubject = new ProductServices();
 		CheckoutCartRequestBean cartBean = new CheckoutCartRequestBean();
 		ArrayList<CartItem> cartList =  new ArrayList<>();
@@ -94,8 +94,5 @@ public class ProductServicesTest {
 			assertEquals(e.getMessage(), "Invalid Products");
 		}
 		assertNull(response);
-		
-		
 	}
-	
 }

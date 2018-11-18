@@ -10,7 +10,7 @@ public class ProductBean {
 	
 	private Double price;
 	
-	private Double tax;
+	private String type;
 	
 	public String getId() {
 		return id;
@@ -36,10 +36,10 @@ public class ProductBean {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-	public Double getTax() {
-		return tax;
+	public String getType() {
+		return type;
 	}
-	public void setTax(Double tax) {
-		this.tax = tax;
+	public void setType(String type) {
+		this.type = type;
 	}
 }

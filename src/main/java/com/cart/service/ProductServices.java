@@ -13,6 +13,8 @@ import com.cart.bean.BillItem;
 import com.cart.bean.CartItem;
 import com.cart.bean.CheckoutCartRequestBean;
 import com.cart.bean.ProductBean;
+import com.cart.bean.TaxCategory;
+import com.cart.bean.TaxDetailsBean;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
@@ -20,12 +22,19 @@ public class ProductServices {
 
 	public static AllProductsResponseBean productData;
 	
+	public static TaxDetailsBean taxDataByType;
+	
 	public ProductServices() {
 		
 		try {
-			File file = new ClassPathResource("data.json").getFile();
-			String content = new String(Files.readAllBytes(file.toPath()));
+			File productsData = new ClassPathResource("data.json").getFile();
+			String content = new String(Files.readAllBytes(productsData.toPath()));
 			productData = new ObjectMapper().readValue(content, AllProductsResponseBean.class);
+			
+			File taxData = new ClassPathResource("tax.json").getFile();
+			String taxContent = new String(Files.readAllBytes(taxData.toPath()));
+			taxDataByType = new ObjectMapper().readValue(taxContent, TaxDetailsBean.class);
+
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -49,11 +58,12 @@ public class ProductServices {
 		
 		cartItems.forEach(item -> {
 			ProductBean productBean = this.getProduct(item.getId());
+			TaxCategory taxCategory = this.getSalesTax(productBean.getType());
 			
-			if(productBean != null) {
+			if(productBean != null && taxCategory != null) {
 				
 				Double totalPrice = item.getQuantity() * productBean.getPrice();
-				Double salestax = (productBean.getTax()/100) * productBean.getPrice();
+				Double salestax = (taxCategory.getTax()/100) * productBean.getPrice();
 				Double actualPrice = productBean.getPrice() - salestax;
 				
 				BillItem billItem = new BillItem();
@@ -89,6 +99,15 @@ public class ProductServices {
 				   .orElse(null);
 		 
 		return productBean;
+	}
+	
+	public TaxCategory getSalesTax(String productCategory) {
+		TaxCategory taxCategory = taxDataByType.getProductCategories()
+				.stream()
+				.filter(category -> productCategory.equals(category.getType()))
+				.findAny()
+				.orElse(null);
+		return taxCategory;
 	}
 	
 }
